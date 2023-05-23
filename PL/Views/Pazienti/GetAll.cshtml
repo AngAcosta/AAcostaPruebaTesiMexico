@@ -1,0 +1,59 @@
+﻿@model ML.Pazienti
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Lista de Pazienti</h2>
+<br />
+
+<div>
+    <div>
+        @using (Html.BeginForm("GetAll", "Pazienti", FormMethod.Post, new { }))
+        {
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.IdPaziente)
+                @Html.TextBoxFor(model => model.IdPaziente, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IdPaziente)
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Nome)
+                @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+            <br />
+
+            <div>
+                <input class="btn btn-info" type="submit" value="Buscar" />
+            </div>
+        }
+    </div>
+    <br />
+
+    <div>
+        <table class="table-info table table-bordered table-responsive table-hover">
+            <thead>
+                <tr>
+                    <td class="text-center" style="font-weight:bold;">IdPazienti</td>
+                    <td class="text-center" style="font-weight:bold;">Nome</td>
+                    <td class="text-center" style="font-weight:bold;">Cognome</td>
+                    <td class="text-center" style="font-weight:bold;">DataNascita</td>
+                    <td class="text-center" style="font-weight:bold;">DataOraPrelievo</td>
+                </tr>
+            </thead>
+            @foreach (ML.Pazienti pazienti in Model.Pazientis)
+            {
+                <tbody>
+                    <tr>
+                        <td class="text-center" style="font-weight:bold;">@pazienti.IdPaziente</td>
+                        <td class="text-center" style="font-weight:bold;">@pazienti.Nome</td>
+                        <td class="text-center" style="font-weight:bold;">@pazienti.Cognome</td>
+                        <td class="text-center" style="font-weight:bold;">@pazienti.DataNascita</td>
+                        <td class="text-center" style="font-weight:bold;">@pazienti.PrelieviPreno.DataOraPrelievo</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
